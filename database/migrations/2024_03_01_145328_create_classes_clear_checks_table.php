@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('classes_clear_checks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('classes_id')->constrained();
+            $table->foreignId('grades_id')->constrained();
             $table->tinyInteger('clear_flg');
             $table->timestamps();
         });

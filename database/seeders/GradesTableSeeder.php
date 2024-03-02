@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ClassesTableSeeder extends Seeder
+class GradesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('classes')->insert([
+        \DB::table('grades')->insert([
             [
                 'id'=>'1',
                 'name'=>'小学校1年生',
