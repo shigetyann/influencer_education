@@ -1,0 +1,117 @@
+.container {
+    display: inline-flex;
+}
+.grade-head {
+    display: inline-flex;
+    padding-left: 135px;
+    height: 100%; /* 親要素の高さを100%に設定 */
+}
+
+.grade {
+    display: inline-flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.grade-container {
+    flex-direction: column;
+    height: 100%; /* 親要素の高さを100%に設定 */
+}
+
+.grade-link {
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+}
+
+.table-container {
+    display: flex;
+    flex-wrap: wrap; /* 横に並ぶようにする */
+    justify-content: center;
+    width: 100%; /* 全幅に広げる */
+}
+
+.table {
+    /* 横に並べる */
+    flex: 0 0 calc(33.333% - 20px); /* 3つ横並びにする */
+    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    height: auto; /* テーブルの高さを自動に設定 */
+    max-width: 300px; /* 最大幅を設定 */
+}
+
+.edit-button {
+    background: rgb(24, 57, 24); 
+    color: #FFF; 
+    border-radius: 10px; 
+    text-align: center;
+    padding: 10px;
+}
+
+.edit {
+    margin-top: auto; /* ボタンを下部に配置 */
+}
+
+.curriculum-set th {
+    text-align: left;
+}
+
+.submit-btn {
+    text-align: center;
+}
+
+.submit {
+    width: 40%;
+    background-color: rgb(80, 80, 2);
+    color: white;
+}
+
+.time-container {
+    display: block;
+}
+
+
+.set-table {
+    display: block;
+}
+
+.set-table th{
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+.time-submit {
+    display: block;
+    text-align: center;
+}
+
+.time-btn {
+    width: 40%;
+    background-color: rgb(80, 80, 2);
+    color: white;
+}
+
+.subtruct {
+    border-radius: 50%;
+    border: 0;
+    background-color: red;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
+.add {
+    border-radius: 50%;
+    border: 0;
+    background-color: rgb(76, 120, 12);
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.mark {
+    display: inline;
+}
