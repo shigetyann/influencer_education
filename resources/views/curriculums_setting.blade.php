@@ -3,21 +3,24 @@
 @section('title', '授業設定')
 
 @section('content')
-
-    <div>
+<div>
+    @if($curriculum && $curriculum->grade)
         <button class="return" type="submit" onclick="location.href='{{ route('curriculums_list', ['id' => $curriculum->grade->id]) }}'">←戻る</button>
-    </div>
+    @endif
+</div>
 
-    <div>
+<div>
         <h1>授業設定</h1>
     </div>
 
     <div>
-        <form action="{{ route('curriculums_edit', ['id' => $curriculum->id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ $curriculum ? route('curriculums_edit', ['id' => $curriculum->id]) : '#' }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <img src="{{ asset('storage/'.$curriculum->thumbnail) }}">
-            <input type="file" name="thumbnail" id="thumbnail">
+                @if($curriculum && $curriculum->thumbnail)
+                    <img src="{{ asset('storage/'.$curriculum->thumbnail) }}">
+                @endif
+                    <input type="file" name="thumbnail" id="thumbnail">
             
             <table class="curriculum-set">
                 <tr>
@@ -33,24 +36,24 @@
                 <tr>
                     <th>授業名</th>
                     <td>
-                        <input type="text" id="title" name="title" value="{{ $curriculum->title }}">
+                    <input type="text" id="title" name="title" value="{{ $curriculum ? $curriculum->title : '' }}">
                     </td>
                 </tr>
                 <tr>
                     <th>動画URL</th>
                     <td>
-                        <input type="url" id="video_url" name="video_url" value="{{ $curriculum->video_url }}">
+                    <input type="url" id="video_url" name="video_url" value="{{ $curriculum ? $curriculum->video_url : '' }}">
                     </td>
                 </tr>
                 <tr>
                     <th>授業概要</th>
                     <td>
-                        <textarea id="description" name="description">{{ $curriculum->description }}</textarea>
+                        <textarea id="description" name="description">{{ $curriculum ? $curriculum->description : '' }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" id="alway_delivery_flg" name="alway_delivery_flg" {{ $curriculum->alway_delivery_flg == 1 ? 'checked' : '' }}>
+                    <input type="checkbox" id="alway_delivery_flg" name="alway_delivery_flg" {{ $curriculum && $curriculum->alway_delivery_flg == 1 ? 'checked' : '' }}>
                         <label>常時公開</label>
                     </td>
                 </tr>

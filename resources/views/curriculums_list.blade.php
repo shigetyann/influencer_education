@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div id="grade-container">
+<div id="grade-container" >
     <div>
         <button type="submit">←戻る</button>
     </div>
@@ -12,10 +12,13 @@
         <h1>授業一覧</h1>
     </div>
     <div>
+        <button onclick="location.href='{{ route('curriculums_setting') }}'">新規登録</button>
+    </div>
+    <div>
         <h1 class="grade-head">{{ $grade->name }}</h1>
     </div>
 
-    <div class="container">
+    <div class="container" >
     
         <div class="grade">
             @foreach($grades as $grade)

@@ -64,19 +64,32 @@ function del(button) {
 }
 
 
-$(document).ready(function() {
+
+ $(document).ready(function() {
   $('.grade-link').click(function() {
-       var id = $(this).data('grade-id');
-       $.ajax({
-           url: "/curriculums.list/" + id,
-           type: "GET",
-           success: function(response) {
-               $('#curriculums-container').html(response);
-           },
-           error: function(xhr) {
-               console.log(xhr.responseText);
-           }
-       });
+     // 現在のURLを取得
+     const currentUrl = window.location.href;
+ 
+     // クリックされたボタンに関連付けられた授業のIDを取得
+     const gradeId = $(this).data('grade-id');
+     const lastIndex = currentUrl.lastIndexOf('/');
+     const baseUrl = currentUrl.substring(0, lastIndex);
+     // 取得したIDを使用して新しいURLを構築
+     const newUrl = baseUrl + '/' + gradeId;
+     console.log("Requesting URL:", newUrl);
+     $.ajax({
+         url: newUrl,
+         type: "GET",
+         success: function(response) {
+           console.log("Response:", response);
+           // レスポンスを受け取った後に、#grade-container内のHTMLを更新
+           $('#grade-container').html(response);
+         },
+         error: function(xhr) {
+             console.log(xhr.responseText);
+         }
+     });
   });
  });
+ 
  

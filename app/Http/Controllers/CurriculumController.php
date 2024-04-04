@@ -32,23 +32,21 @@ class CurriculumController extends Controller
 
     }
 
-    public function curriculumsSetting ($id) {
-        $curriculum = Curriculum::find($id);
-
-        $curriculumModel = new Curriculum();
-        $curriculums = $curriculumModel->getList();
-
-        $gradeModel = new Grade();
-        $grades = $gradeModel->getList();
-
-        $delivery_timeModel = new DeliveryTime();
-        $delivery_times = $delivery_timeModel->getList();
-
-
-        return view('curriculums_setting', ['curriculums' => $curriculums, 'grades' => $grades, 'delivery_times' => $delivery_times, 'curriculum' => $curriculum]);
-
+    public function curriculumsSetting($id = null) {
+        if ($id) {
+            $curriculum = Curriculum::find($id);
+        } else {
+            $curriculum = null;
+        }
+    
+        $curriculums = Curriculum::all();
+        $grades = Grade::all();
+        $delivery_times = DeliveryTime::all();
+    
+        return view('curriculums_setting', compact('curriculum', 'curriculums', 'grades', 'delivery_times'));
     }
-
+    
+    
     public function curriculumsEdit(Request $request, $id) {
         DB::beginTransaction();
     
