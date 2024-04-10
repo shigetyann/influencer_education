@@ -27,12 +27,12 @@ class CurriculumRequest extends FormRequest
             'title' => 'required|max:255|string',
             'thumbnail' => 'nullable|max:255|string',
             'description' => 'nullable|max:1000|string',
-            'video_url' => 'nullable|max1000|string',
+            'video_url' => 'nullable|max:1000|url',
             'alway_delivery_flg' => 'required|max:4|tinyInteger',
             'grade_id' => 'required|max:10|integer',
             'curriculums_id' =>'required|max:10|integer',
-            'delivery_from' => 'required|max:14|dateTime',
-            'delivery_to' => 'required|max:14|dateTime',
+            'delivery_from' => 'required|date_format:Y-m-d H:i',
+            'delivery_to' => 'required|date_format:Y-m-d H:i',
         ];
     }
 
@@ -53,6 +53,8 @@ class CurriculumRequest extends FormRequest
     public function messages() {
         return [
             'title.required' => ':attributeは必須項目です。',
+            'description.max' => ':attributeは:max字以内で入力してください。',
+            'video_url.url' => ':attributeはURL形式で入力してください。',
             'alway_delivery_flg.required' => ':attributeは必須項目です。',
             'grade_id.required' => ':attributeは必須項目です。',
             'curriculums_id.required' => ':attributeは必須項目です。',

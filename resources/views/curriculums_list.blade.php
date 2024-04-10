@@ -31,7 +31,7 @@
                 <div class="table">
                     <table>
                         <tr>
-                            <th><img src="{{ asset('storage/'.$curriculum->thumbnail) }}"></th>
+                            <th><img class="img" src="{{ asset('storage/'.$curriculum->thumbnail) }}"></th>
                         </tr>
                         <tr>
                             <th colspan="2">{{ $curriculum->title }}</th>
