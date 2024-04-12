@@ -60,6 +60,8 @@ class CurriculumRequest extends FormRequest
             'curriculums_id.required' => ':attributeは必須項目です。',
             'delivery_from.required' => ':attributeは必須項目です。',
             'delivery_to.required' =>':attributeは必須項目です。',
+            'delivery_from' => ':attributeは:Y-m-d H:i形式で入力してください。',
+            'delivery_to' => ':attributeは:Y-m-d H:i形式で入力してください。',
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Curriculum;
 use App\Models\DeliveryTime;
 use App\Http\Requests\CurriculumRequest;
 use Carbon\Carbon; 
+use Illuminate\Support\Facades\Validator;
 
 
 class DeliveryTimeController extends Controller
@@ -22,7 +23,7 @@ class DeliveryTimeController extends Controller
 
         if (!$delivery_time) {
             $delivery_time = new DeliveryTime;
-            $delivery_time->curriculums_id = $id; // この行は、新しいインスタンスを作成する際に必要な初期化を行います。
+            $delivery_time->curriculums_id = $id; 
         }
 
         $delivery_times = DeliveryTime::all();
@@ -33,34 +34,43 @@ class DeliveryTimeController extends Controller
 
 
 
-    public function timesSet(Request $request, $id) {
-        DB::beginTransaction();
-    
+    public function timesSet(Request $request, $id = null) {
         try {
-            $delivery_time = DeliveryTime::find($id);
-        
-            if (!$delivery_time) {
-                $delivery_time = new DeliveryTime();
+            DB::beginTransaction();
+    
+            $validator = Validator::make($request->all(), [
+                'delivery_from' => 'required|date_format:Y-m-d',
+                'delivery_from_time' => 'required|date_format:H:i',
+                'delivery_to' => 'required|date_format:Y-m-d',
+                'delivery_to_time' => 'required|date_format:H:i',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->first()], 400);
             }
-        
-            $delivery_time->timesSet($request);
-            
+    
+            $delivery_time = $id ? DeliveryTime::find($id) : new DeliveryTime();
+    
+            if (!$delivery_time) {
+                return response()->json(['error' => 'Delivery time not found'], 404);
+            }
+    
+            $delivery_time->setTimes($request);
+    
             DB::commit();
-            
-            logger('配信日時が編集されました。');
-            
+    
+            logger('Delivery time updated.');
+    
+            $curriculum = $delivery_time->curriculum;
+    
+            return redirect()->route('curriculums_list', ['id' => $curriculum->grade_id])
+                ->with('success', 'Curriculum updated successfully.');
         } catch (\Exception $e) {
             logger($e->getMessage());
             DB::rollback();
-            return back()->withErrors(['error' => 'Failed to update delivery_time.']);
+            return back()->withErrors(['error' => 'Failed to update delivery time.']);
         }
-    
-        $curriculum = $delivery_time->curriculum;
-        
-        return redirect(route('curriculums_list', ['id' => $curriculum->grade_id]))
-            ->with('success', 'Curriculum updated successfully.')
-            ->with(compact('delivery_time', 'curriculum'));
-    }
+    }    
 
 
 }
