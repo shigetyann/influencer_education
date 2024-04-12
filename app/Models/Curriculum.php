@@ -62,4 +62,25 @@ class Curriculum extends Model
         }
         return $this->thumbnail;
     }
+
+    public static function curriculumsCreate(Request $request) {
+        // ファイルアップロードの処理
+        $thumbnail = null;
+        if ($request->hasFile('thumbnail')) {
+            $filename = $request->file('thumbnail')->store('public');
+            $thumbnail = basename($filename);
+        }
+
+        // カリキュラムの作成
+        $curriculum = self::create([
+            'title' => $request->input('title'),
+            'thumbnail' => $thumbnail,
+            'description' => $request->input('description'),
+            'video_url' => $request->input('video_url'),
+            'alway_delivery_flg' => $request->has('alway_delivery_flg') ? 1 : 0,
+            'grade_id' => $request->input('grade_id'),
+        ]);
+
+        return $curriculum;
+    }
 }

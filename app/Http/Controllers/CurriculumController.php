@@ -12,7 +12,7 @@ use App\Models\DeliveryTime;
 
 class CurriculumController extends Controller
 {
-    public function curriculumsList ($grade_id) {
+    public function curriculumsList ($grade_id ) {
         $curriculums = Curriculum::where('grade_id', $grade_id)->get();
         $grade = Grade::find($grade_id);
         $grades = Grade::all();
@@ -65,5 +65,26 @@ class CurriculumController extends Controller
         }
     
         return redirect(route('curriculums_list', ['id' => $curriculum->grade_id]))->with('success', 'Curriculum updated successfully.');
+    }
+
+    public function curriculumsCreate(Request $request) {
+        DB::beginTransaction();
+    
+        try {
+            $curriculum = new Curriculum;
+            $curriculum->updateCurriculum($request);
+    
+            DB::commit();
+            $curriculum = Curriculum::curriculumsCreate($request);
+            logger('Curriculum object: ', ['curriculum' => $curriculum]);
+            logger('新しい授業内容が登録されました。');
+    
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+            DB::rollback();
+            return back()->withErrors(['error' => 'Failed to create curriculum.']);
+        }
+        logger('Curriculum ID: ' . $curriculum->id);
+        return redirect(route('curriculums_list', ['id' => $curriculum->grade_id]))->with('success', 'Curriculum created successfully.');
     }
 }

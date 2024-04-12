@@ -18,6 +18,8 @@
         <h1 class="grade-head">{{ $grade->name }}</h1>
     </div>
 
+
+    
     <div class="container" >
     
         <div class="grade">
