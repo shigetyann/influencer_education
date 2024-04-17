@@ -23,6 +23,7 @@
                             <th>{{ $curriculum->title }}</th>
                             <th><input type="hidden" name="curriculums_id" value="{{ $curriculum->id }}"></th>
                         </tr>
+                        @foreach($delivery_times as $delivery_time)
                         <tr>
                         @if ($delivery_time)
                             <td><input type="text" name="delivery_from" value="{{ old('delivery_from', ($delivery_time ? ($delivery_time->delivery_from ? $delivery_time->delivery_from->format('Y-m-d') : '') : '')) }}" placeholder="年月日"></td>
@@ -51,6 +52,7 @@
                         @endif
                             <td class="mark"><button class="subtruct" type="button" value="ー" onclick="del(this)">ー</button></td>
                         </tr>
+                        @endforeach
                         <tr></tr>
                 </table>
                         <div class="mark">

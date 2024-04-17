@@ -19,16 +19,15 @@ class DeliveryTimeController extends Controller
         $curriculum = Curriculum::find($id);
         $curriculums = Curriculum::all();
 
-        $delivery_time = DeliveryTime::where('curriculums_id', $id)->first();
+        $delivery_times = DeliveryTime::where('curriculums_id', $id)->get();
 
-        if (!$delivery_time) {
-            $delivery_time = new DeliveryTime;
-            $delivery_time->curriculums_id = $id; 
-        }
 
-        $delivery_times = DeliveryTime::all();
 
-        return view('delivery_times', ['curriculum' => $curriculum, 'curriculums' => $curriculums, 'delivery_times' => $delivery_times, 'delivery_time' => $delivery_time]);
+        return view('delivery_times', [
+            'curriculum' => $curriculum, 
+            'curriculums' => $curriculums, 
+            'delivery_times' => $delivery_times, 
+            ]);
 
     }
 
@@ -41,17 +40,17 @@ class DeliveryTimeController extends Controller
             // 既存の授業の日時を削除
             DeliveryTime::where('curriculums_id', $id)->delete();
     
-            $delivery_time = new DeliveryTime;
-            $delivery_time->curriculums_id = $id;
-    
             // 新しい日時を登録
-            $delivery_time->timesSet($request);
+            $times = $request->input('times', []);
+            logger('Times to insert:', $times); 
+    
+            $deliveryTimeModel = new DeliveryTime;
+            $deliveryTimeModel->insertTimes($id, $times);
     
             DB::commit();
     
             logger('Delivery time updated.');
     
-            // カリキュラムテーブルのgrade_idにリダイレクト
             $curriculum = Curriculum::find($id);
             return redirect()->route('curriculums_list', ['id' => $curriculum->grade_id])
                 ->with('success', 'Curriculum updated successfully.');
@@ -61,5 +60,6 @@ class DeliveryTimeController extends Controller
             return back()->withErrors(['error' => 'Failed to update delivery time.']);
         }
     }
-    
+
+
 }

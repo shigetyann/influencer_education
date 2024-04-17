@@ -15,7 +15,7 @@ class DeliveryTime extends Model
 
     protected $table = 'delivery_times';
     protected $fillable = [
-        'delivery_from', 'delivery_to',
+        'curriculums_id', 'delivery_from', 'delivery_to',
     ];
 
     protected $dates = [
@@ -47,18 +47,19 @@ class DeliveryTime extends Model
         $this->save();
     }
 
-    public function setTimes(Request $request) {
-        $delivery_from_date = $request->input('delivery_from');
-        $delivery_from_time = $request->input('delivery_from_time');
-        $delivery_to_date = $request->input('delivery_to');
-        $delivery_to_time = $request->input('delivery_to_time');
+
+    public function insertTimes($curriculums_id, $times) {
+        foreach ($times as $time) {
+            $delivery_from = Carbon::createFromFormat('Y-m-d H:i', $time['delivery_from_date'] . ' ' . $time['delivery_from_time']);
+            $delivery_to = Carbon::createFromFormat('Y-m-d H:i', $time['delivery_to_date'] . ' ' . $time['delivery_to_time']);
     
-        $delivery_from = Carbon::createFromFormat('Y-m-d H:i', $delivery_from_date . ' ' . $delivery_from_time);
-        $delivery_to = Carbon::createFromFormat('Y-m-d H:i', $delivery_to_date . ' ' . $delivery_to_time);
-    
-        $this->curriculums_id = $request->input('curriculums_id');
-        $this->delivery_from = $delivery_from;
-        $this->delivery_to = $delivery_to;
-        $this->save();
+            $this->create([
+                'curriculums_id' => $curriculums_id,
+                'delivery_from' => $delivery_from,
+                'delivery_to' => $delivery_to,
+            ]);
+        }
     }
+
+
 }
