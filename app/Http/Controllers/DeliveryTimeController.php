@@ -38,31 +38,21 @@ class DeliveryTimeController extends Controller
         try {
             DB::beginTransaction();
     
-            $validator = Validator::make($request->all(), [
-                'delivery_from' => 'required|date_format:Y-m-d',
-                'delivery_from_time' => 'required|date_format:H:i',
-                'delivery_to' => 'required|date_format:Y-m-d',
-                'delivery_to_time' => 'required|date_format:H:i',
-            ]);
+            // 既存の授業の日時を削除
+            DeliveryTime::where('curriculums_id', $id)->delete();
     
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()->first()], 400);
-            }
+            $delivery_time = new DeliveryTime;
+            $delivery_time->curriculums_id = $id;
     
-            $delivery_time = $id ? DeliveryTime::find($id) : new DeliveryTime();
-    
-            if (!$delivery_time) {
-                return response()->json(['error' => 'Delivery time not found'], 404);
-            }
-    
-            $delivery_time->setTimes($request);
+            // 新しい日時を登録
+            $delivery_time->timesSet($request);
     
             DB::commit();
     
             logger('Delivery time updated.');
     
-            $curriculum = $delivery_time->curriculum;
-    
+            // カリキュラムテーブルのgrade_idにリダイレクト
+            $curriculum = Curriculum::find($id);
             return redirect()->route('curriculums_list', ['id' => $curriculum->grade_id])
                 ->with('success', 'Curriculum updated successfully.');
         } catch (\Exception $e) {
@@ -70,7 +60,6 @@ class DeliveryTimeController extends Controller
             DB::rollback();
             return back()->withErrors(['error' => 'Failed to update delivery time.']);
         }
-    }    
-
-
+    }
+    
 }
