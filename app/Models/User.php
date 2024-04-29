@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use COM;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,8 +22,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'name_kana',
+        'profile_image',
+        'grades_id'
     ];
+    
 
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +51,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(){
+        return $this->admin != null;
+    }
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class,'grades_id');
+    }
+
+    public function curriculumProgress()
+    {
+        return $this->hasMany(CurriculumProgress::class,'users_id');
+    }
+    
+    public function classClearChecks()
+    {
+        return $this->hasMany(ClassClearCheck::class,'users_id');
+    }
 }
+

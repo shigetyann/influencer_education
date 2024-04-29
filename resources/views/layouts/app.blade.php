@@ -13,8 +13,18 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/delete.js'])
+    <script src="http://localhost:8888/influencer_education/public/build/assets/app-64b6ca7e.js"></script>
+    <script src="http://localhost:8888/influencer_education/public/build/assets/delete-56551788.js"></script>
+
+
+
 </head>
 <body>
     <div id="app">
@@ -56,8 +66,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -78,3 +88,4 @@
     </div>
 </body>
 </html>
+

@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('classes_clear_checks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('grades_id')->constrained();
-            $table->tinyInteger('clear_flg')->default(0);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('role')->default('user');
         });
     }
+    
 
     /**
      * Reverse the migrations.
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes_clear_checks');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

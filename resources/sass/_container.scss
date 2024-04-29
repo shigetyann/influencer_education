@@ -1,0 +1,100 @@
+.newslist {
+    width: 100%;
+    max-width: 800px; /* 必要に応じて調整 */
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    form {
+        .form-group {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            textarea {
+                resize: vertical;
+            }
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #555;
+            }
+        }
+    }
+}
+
+.register-button {
+    margin-bottom: 20px; /* 必要に応じて調整 */
+}
+
+
+#newstable {
+    width: 100%;
+    max-width: 800px; /* 必要に応じて調整 */
+    margin: 0 auto;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.notice{
+    width: 100%;
+    max-width: 800px; /* 必要に応じて調整 */
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .articleContents{
+        .title{
+            margin-bottom: 20px;
+        }
+        .contents{
+            overflow-wrap: break-word;
+        }
+
+    }
+    
+}
+.custom-file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.custom-file-upload input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+
+.custom-file-label {
+    border: 1px solid #ced4da;
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+
+

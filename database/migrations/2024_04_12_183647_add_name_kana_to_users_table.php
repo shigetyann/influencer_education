@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('classes_clear_checks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('user_id')->constrained();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('name_kana')->nullable();
+            $table->string('profile_image')->default('storage/profile_image/profile_image.jpg');
             $table->foreignId('grades_id')->constrained();
-            $table->tinyInteger('clear_flg')->default(0);
-            $table->timestamps();
         });
     }
 
@@ -29,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes_clear_checks');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['name_kana', 'profile_image', 'grades_id']);
+        });
     }
 };
