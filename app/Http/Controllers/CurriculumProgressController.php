@@ -12,20 +12,16 @@ class CurriculumProgressController extends Controller
         $user = Auth::user();
         $grades = DB::table('grades')->get();
         $curriculums = DB::table('curriculums')->get();
-        return view('user/curriculum_progress', compact('user','grades','curriculums'));
+        $curriculumProgress = $user->curriculumProgress;
+    
+        $progressStatus = $curriculums->mapWithKeys(function ($curriculum) use ($curriculumProgress) {
+            $isProgress = $curriculumProgress->where('curriculums_id', $curriculum->id)->first() ? true : false;
+            return [$curriculum->id => $isProgress];
+        });
+    
+        return view('user/curriculum_progress', compact('user', 'grades', 'curriculums', 'progressStatus'));
     }
-
-    public function progress($id)
-    {
-        $user = Auth::user();
-        $curriculumProgress = $user->curriculum_progress;
-
-        app(ClassClearCheckController::class)->updateClearStatus(request(), $id, $curriculumProgress);
-
-        $isProgress = $curriculumProgress->where('curriculum_id', $id)->first();
-
-        return view('user/curriculum_progress', ['isProgress' => $isProgress]);
-    }
+    
 
 
 }

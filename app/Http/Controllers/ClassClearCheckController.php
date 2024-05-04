@@ -15,7 +15,7 @@ class ClassClearCheckController extends Controller
             $classClearCheck->save();
         }
         
-        return redirect()->back();
+        return redirect()->route('curriculum_progress');
     }
 
 }

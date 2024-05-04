@@ -9,7 +9,7 @@ class ClassClearCheck extends Model
 {
     public static function classClearCheck()
     {
-        $classes_clear_checks = DB::table();
+        $classes_clear_checks = DB::table('classes_clear_checks');
         return $classes_clear_checks;
     }
 

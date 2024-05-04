@@ -17,11 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(GradesTableSeeder::class);
-        //$this->call(ArticlesTableSeeder::class);
-        //$this->call(UsersSeeder::class);
-
-        $curriculums = Curriculum::factory()->count(5)->create();
+        $this->call(GradesTableSeeder::class);
+        $this->call(ArticlesTableSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(CurriculumsSeeder::class);
+        $this->call(ClassesClearCheckSeeder::class);
+        //$curriculums = Curriculum::factory()->count(5)->create();
         $curriculumProgress = CurriculumProgress::factory()->create();
 
         // \App\Models\User::factory(10)->create();
