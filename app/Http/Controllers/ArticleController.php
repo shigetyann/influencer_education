@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\ArticlesRequest;
 
 class ArticleController extends Controller
 {
@@ -39,13 +39,8 @@ class ArticleController extends Controller
         return view('admin/articles_edit', compact('article'));
     }
 
-    public function saveArticle(Request $request, Article $article = null)
+    public function saveArticle(ArticlesRequest $request, Article $article = null)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'posted_date' => 'required|date',
-            'article_contents' => 'required',
-        ]);
 
         if ($article === null) {
             $article = new Article;

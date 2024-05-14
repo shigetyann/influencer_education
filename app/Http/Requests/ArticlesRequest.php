@@ -36,6 +36,7 @@ class ArticlesRequest extends FormRequest
             'posted_date.required' => '投稿日時は必須です。',
             'title.required' => 'タイトルは必須です。',
             'article_contents.required' => '本文は必須です。',
+            
         ];
     }
 }
