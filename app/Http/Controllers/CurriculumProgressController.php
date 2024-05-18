@@ -5,23 +5,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class CurriculumProgressController extends Controller
 {
     public function curriculumProgress(){
         $user = Auth::user();
         $grades = DB::table('grades')->get();
-        $curriculums = DB::table('curriculums')->get();
+        
+        // 学年ごとのカリキュラムをグループ化
+        $curriculumsByGrade = DB::table('curriculums')->get()->groupBy('grades_id');
         $curriculumProgress = $user->curriculumProgress;
     
-        $progressStatus = $curriculums->mapWithKeys(function ($curriculum) use ($curriculumProgress) {
-            $isProgress = $curriculumProgress->where('curriculums_id', $curriculum->id)->first() ? true : false;
-            return [$curriculum->id => $isProgress];
-        });
+        // 各カリキュラムの進捗状況を取得
+        $progressStatus = $curriculumProgress->pluck('curriculums_id')->toArray();
     
-        return view('user/curriculum_progress', compact('user', 'grades', 'curriculums', 'progressStatus'));
+        return view('user/curriculum_progress', compact('user', 'grades', 'curriculumsByGrade', 'progressStatus'));
     }
-    
-
-
 }

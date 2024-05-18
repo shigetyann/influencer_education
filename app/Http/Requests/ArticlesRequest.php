@@ -34,7 +34,9 @@ class ArticlesRequest extends FormRequest
     {
         return [
             'posted_date.required' => '投稿日時は必須です。',
+            'posted_date.date_format' => '投稿日時は「年-月-日」の形式で入力してください。',
             'title.required' => 'タイトルは必須です。',
+            'title.max' =>'タイトルは255文字以内で入力してください。',
             'article_contents.required' => '本文は必須です。',
             
         ];

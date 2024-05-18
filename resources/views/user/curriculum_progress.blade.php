@@ -12,16 +12,20 @@
         @foreach ($grades as $grade)
             <div class="curriculum-container">
                 <p>{{ $grade->name }}</p>
-                @foreach ($curriculums as $curriculum)
-                    <div class="curriculum-title">
-                        @if ($progressStatus[$curriculum->id])
-                            <h6 class='curriculum-clear'>受講済み</h6>
-                            <a>{{ $curriculum->title }}</a>
-                        @else
-                            <p>{{ $curriculum->title }}</p>
-                        @endif
-                    </div>
-                @endforeach
+                @if (isset($curriculumsByGrade[$grade->id]))
+                    @foreach ($curriculumsByGrade[$grade->id] as $curriculum)
+                        <div class="curriculum-title">
+                            @if (in_array($curriculum->id, $progressStatus))
+                                <h6 class='curriculum-clear'>受講済み</h6>
+                                <a>{{ $curriculum->title }}</a>
+                            @else
+                                <p>{{ $curriculum->title }}</p>
+                            @endif
+                        </div>
+                    @endforeach
+                @else
+                    <p>この学年にはカリキュラムがありません。</p>
+                @endif
             </div>
         @endforeach
     </div>
