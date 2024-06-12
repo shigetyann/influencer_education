@@ -26,26 +26,26 @@
                         @foreach($delivery_times as $delivery_time)
                         <tr>
                         @if ($delivery_time)
-                            <td><input type="text" name="delivery_from" value="{{ old('delivery_from', ($delivery_time ? ($delivery_time->delivery_from ? $delivery_time->delivery_from->format('Y-m-d') : '') : '')) }}" placeholder="年月日"></td>
-                            <td><input type="text" name="delivery_from_time" value="{{ old('delivery_from_time', ($delivery_time ? ($delivery_time->delivery_from ? $delivery_time->delivery_from->format('H:i') : '') : '')) }}" placeholder="日時"></td>
+                            <td><input type="date" name="delivery_from" value="{{ old('delivery_from', ($delivery_time ? ($delivery_time->delivery_from ? $delivery_time->delivery_from->format('Y-m-d') : '') : '')) }}" placeholder="年月日"></td>
+                            <td><input type="time" name="delivery_from_time" value="{{ old('delivery_from_time', ($delivery_time ? ($delivery_time->delivery_from ? $delivery_time->delivery_from->format('H:i') : '') : '')) }}" placeholder="日時"></td>
                             @if ($errors->has('delivery_from'))
                                 <p class="error">{{ $errors->first('delivery_from') }}</p>
                             @endif
                             <td>～</td>
-                            <td><input type="text" name="delivery_to" value="{{ old('delivery_to', ($delivery_time ? ($delivery_time->delivery_to ? $delivery_time->delivery_to->format('Y-m-d') : '') : '')) }}" placeholder="年月日"></td>
-                            <td><input type="text" name="delivery_to_time" value="{{ old('delivery_to_time', ($delivery_time ? ($delivery_time->delivery_to ? $delivery_time->delivery_to->format('H:i') : '') : '')) }}" placeholder="日時"></td>
+                            <td><input type="date" name="delivery_to" value="{{ old('delivery_to', ($delivery_time ? ($delivery_time->delivery_to ? $delivery_time->delivery_to->format('Y-m-d') : '') : '')) }}" placeholder="年月日"></td>
+                            <td><input type="time" name="delivery_to_time" value="{{ old('delivery_to_time', ($delivery_time ? ($delivery_time->delivery_to ? $delivery_time->delivery_to->format('H:i') : '') : '')) }}" placeholder="日時"></td>
                             @if ($errors->has('delivery_to'))
                                 <p class="error">{{ $errors->first('delivery_to') }}</p>
                             @endif
                         @else
-                            <td><input type="text" name="delivery_from" placeholder="年月日" value="{{ old('delivery_from') }}"></td>
-                            <td><input type="text" name="delivery_from_time" placeholder="日時" value="{{ old('delivery_from_time') }}"></td>
+                            <td><input type="date" name="delivery_from" placeholder="年月日" value="{{ old('delivery_from') }}"></td>
+                            <td><input type="time" name="delivery_from_time" placeholder="日時" value="{{ old('delivery_from_time') }}"></td>
                             @if ($errors->has('delivery_from'))
                                 <p class="error">{{ $errors->first('delivery_from') }}</p>
                             @endif
                             <td>～</td>
-                            <td><input type="text" name="delivery_to" placeholder="年月日" value="{{ old('delivery_to') }}"></td>
-                            <td><input type="text" name="delivery_to_time" placeholder="日時" value="{{ old('delivery_to_time') }}"></td>
+                            <td><input type="date" name="delivery_to" placeholder="年月日" value="{{ old('delivery_to') }}"></td>
+                            <td><input type="time" name="delivery_to_time" placeholder="日時" value="{{ old('delivery_to_time') }}"></td>
                             @if ($errors->has('delivery_to'))
                                 <p class="error">{{ $errors->first('delivery_to') }}</p>
                             @endif

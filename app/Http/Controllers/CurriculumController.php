@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CurriculumRequest;
+use App\Http\Requests\TimeRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Curriculum;
 use App\Models\Grade;

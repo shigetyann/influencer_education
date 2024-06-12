@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Curriculum;
 use App\Models\DeliveryTime;
 use App\Http\Requests\CurriculumRequest;
+use App\Http\Requests\TimeRequest;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Validator;
 

@@ -3,11 +3,12 @@
 @section('title', '授業設定')
 
 @section('content')
+
+
 <div>
-    @if($curriculum && $curriculum->grade)
-    <button class="return" type="submit" onclick="location.href='{{ route('curriculums_list', ['id' => $curriculum->grade->id]) }}'">←戻る</button>
-    @endif
+    <button type="button" onclick="history.back()">戻る</button>
 </div>
+
 
 <div>
     <h1>授業設定</h1>

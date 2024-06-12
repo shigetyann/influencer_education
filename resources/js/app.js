@@ -3,49 +3,48 @@ import './bootstrap';
 
 document.addEventListener('DOMContentLoaded', function() {
   let timesIndex = 0;
- 
+
   window.add = function() {
-     let tbl = document.getElementById("tbl");
-     let tr = document.createElement("tr");
- 
-     // 日時の入力フィールドを作成
-     let createInput = function(name, placeholder) {
-       let td = document.createElement("td");
-       let input = document.createElement("input");
-       input.type = "text";
-       input.name = `times[${timesIndex}][${name}]`;
-       input.placeholder = placeholder;
-       td.appendChild(input);
-       return td;
-     };
- 
-     // 日時の入力フィールドを追加
-     tr.appendChild(createInput('delivery_from_date', '年月日'));
-     tr.appendChild(createInput('delivery_from_time', '日時'));
-     let td3 = document.createElement("td");
-     td3.textContent = "～";
-     tr.appendChild(td3);
-     tr.appendChild(createInput('delivery_to_date', '年月日'));
-     tr.appendChild(createInput('delivery_to_time', '日時'));
- 
-     // 削除ボタンを追加
-     let td6 = document.createElement("td");
-     let subtructButton = document.createElement("button");
-     subtructButton.className = "subtruct del";
-     subtructButton.type = "button";
-     subtructButton.value = "ー";
-     subtructButton.innerHTML = "ー";
-     subtructButton.onclick = function() {
-       tbl.deleteRow(tr.rowIndex);
-     };
-     td6.appendChild(subtructButton);
-     tr.appendChild(td6);
- 
-     tbl.appendChild(tr);
-     timesIndex++; // インデックスを増やす
+    let tbl = document.getElementById("tbl");
+    let tr = document.createElement("tr");
+
+    // 日時の入力フィールドを作成
+    let createInput = function(name, placeholder, type) {
+      let td = document.createElement("td");
+      let input = document.createElement("input");
+      input.type = type;
+      input.name = `times[${timesIndex}][${name}]`;
+      input.placeholder = placeholder;
+      td.appendChild(input);
+      return td;
+    };
+
+    // 日時の入力フィールドを追加
+    tr.appendChild(createInput('delivery_from_date', '年月日', 'date'));
+    tr.appendChild(createInput('delivery_from_time', '時刻', 'time'));
+    let td3 = document.createElement("td");
+    td3.textContent = "～";
+    tr.appendChild(td3);
+    tr.appendChild(createInput('delivery_to_date', '年月日', 'date'));
+    tr.appendChild(createInput('delivery_to_time', '時刻', 'time'));
+
+    // 削除ボタンを追加
+    let td6 = document.createElement("td");
+    let subtructButton = document.createElement("button");
+    subtructButton.className = "subtruct del";
+    subtructButton.type = "button";
+    subtructButton.value = "ー";
+    subtructButton.innerHTML = "ー";
+    subtructButton.onclick = function() {
+      tbl.deleteRow(tr.rowIndex);
+    };
+    td6.appendChild(subtructButton);
+    tr.appendChild(td6);
+
+    tbl.appendChild(tr);
+    timesIndex++; // インデックスを増やす
   }
- });
- 
+}); 
 
 
 $(document).ready(function() {
