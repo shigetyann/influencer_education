@@ -48,7 +48,7 @@ class CurriculumController extends Controller
     }
     
     
-    public function curriculumsEdit(Request $request, $id) {
+    public function curriculumsEdit(CurriculumRequest $request, $id) {
         DB::beginTransaction();
     
         try {
@@ -68,7 +68,7 @@ class CurriculumController extends Controller
         return redirect(route('curriculums_list', ['id' => $curriculum->grade_id]))->with('success', 'Curriculum updated successfully.');
     }
 
-    public function curriculumsCreate(Request $request) {
+    public function curriculumsCreate(CurriculumRequest $request) {
         DB::beginTransaction();
     
         try {

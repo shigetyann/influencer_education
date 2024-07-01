@@ -34,7 +34,7 @@ class DeliveryTimeController extends Controller
 
 
 
-    public function timesSet(Request $request, $id = null) {
+    public function timesSet(TimeRequest $request, $id = null) {
         try {
             DB::beginTransaction();
     
