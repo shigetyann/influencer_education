@@ -28,7 +28,7 @@ class CurriculumRequest extends FormRequest
             'thumbnail' => 'nullable|max:255|string',
             'description' => 'nullable|max:1000|string',
             'video_url' => 'nullable|max:1000|url',
-            'alway_delivery_flg' => 'required|max:4|tinyInteger',
+            'alway_delivery_flg' => 'nullable|max:4|tinyInteger',
             'grade_id' => 'required|max:10|integer',
         ];
     }
