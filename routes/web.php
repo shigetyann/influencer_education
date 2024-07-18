@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//管理_ログイン画面
+Route::get('/home', [App\Http\Controllers\CurriculumController::class, 'index'])->name('home');
+
+
+
+//ユーザー＿時間割　画面のルーティング
+Route::get('/curriculum', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('curriculum');
+
