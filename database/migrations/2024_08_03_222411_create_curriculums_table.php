@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('video_url');
             $table->tinyInteger('alway_delivery_flg');
-            $table->string('classes_id');
+            $table->integer('classes_id');
             
             $table->timestamps();
         });

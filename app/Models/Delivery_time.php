@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Delivery_time extends Model
 {
+    use HasFactory;
     protected $table = 'delivery_timess';
 
     protected $fillable =
@@ -27,6 +28,8 @@ class Delivery_time extends Model
 
 
 
+
+    
 
 
 

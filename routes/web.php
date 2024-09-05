@@ -25,3 +25,13 @@ Route::get('/home', [App\Http\Controllers\CurriculumController::class, 'index'])
 //ユーザー＿時間割　画面のルーティング
 Route::get('/curriculum', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('curriculum');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//学年詳細画面の表示ルーティング
+Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('grade');
+// Route::post('/detail/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('detail');
+

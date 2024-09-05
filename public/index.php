@@ -48,8 +48,20 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
+
+// 元々これ
+// $response = $kernel->handle(
+//     $request = Request::capture()
+// )->send();
+
+// step7からとってきたやつ
 $response = $kernel->handle(
-    $request = Request::capture()
-)->send();
+    $request = Illuminate\Http\Request::capture()
+);
+$response->send();
+
+
+
+   
 
 $kernel->terminate($request, $response);
