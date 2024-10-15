@@ -35,3 +35,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('grade');
 // Route::post('/detail/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('detail');
 
+// スケジュールのルーティング
+Route::get('/schedule', [App\Http\Controllers\CurriculumController::class, 'showSchedule'])->name('schedule');
+
+

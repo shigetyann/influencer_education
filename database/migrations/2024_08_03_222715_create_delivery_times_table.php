@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('delivery_times', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('curriculums_id');
+            // 授業開始日
             $table->dateTime('delivery_from');
+            // 授業終了日
             $table->dateTime('delivery_to');
             
             $table->timestamps();

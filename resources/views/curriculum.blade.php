@@ -8,8 +8,28 @@
 @section('content')
 
 
+                                                  <!-- 20241015② -->
+                                                <div class="month-navigation">
+                                                    <!-- 前月リンク -->
+                                                    <a href="{{ route('schedule', ['month' => \Carbon\Carbon::parse($currentMonth)->subMonth()->format('Y-m')]) }}">◀︎</a>
+                                                    <!-- 現在の月表示 -->
+                                                    {{ \Carbon\Carbon::parse($currentMonth)->format('Y年n月') }}
+                                                    <!-- 翌月リンク -->
+                                                    <a href="{{ route('schedule', ['month' => \Carbon\Carbon::parse($currentMonth)->addMonth()->format('Y-m')]) }}">▶︎</a>
+                                                </div>
+                    
+                                                <div class="schedule">
+                                                    @foreach ($deliveryTimes as $deliveryTime)
+                                                        <div class="class-item">
+                                                            <h4>{{ $deliveryTime->title }}</h4>
+                                                            <p>{{ $deliveryTime->delivery_from->format('Y年n月j日') }} ~ {{ $deliveryTime->delivery_to->format('Y年n月j日') }}</p>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
 
-   
+                           
+                           
+                            
                 <!-- データ -->
                 <div class="links" id="educationtable">
                     <table class="table table-hover" id = "fav-table">
@@ -31,32 +51,33 @@
                                 <!-- ↓curriculumsの方 -->
                                 <td>{{ $curriculum->title }}</td>
                                 <!-- <td>{{ $curriculum->classes_id }}</td> -->
+
+
+                                <td>{{ $curriculum->grade->name }}</td> <!-- gradeのnameを表示 -->
                                 <!-- ↓delivery_timesの方 -->
+
                                 <td>{{ $curriculum->delivery_from }}</td>
                                 <td>{{ $curriculum->delivery_to }}</td>
                                 
-                            <!-- 詳細ボタン -->
+                       
+
+                                             
 
 
-                                
-                                <!-- 詳細ボタン -->
-                            <!-- <td>
-                                <form class="form-inline" action="{{ route('grade', $curriculum->id) }}" method="POST">
-                                @csrf
-                                <div class="grade">
-                                    <input type="submit" value="{{ $grades->name }}" class="btn btn-info">
 
-                                </div>
-                                </form>
 
-                            </td>
-                             -->
-                           
                             
                                                         
                             </tr>
                         @endforeach
                         </tbody>
+
+
+
+                       
+
+                        
+
                     </table>
                 </div>
 

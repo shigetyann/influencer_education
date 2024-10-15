@@ -62,7 +62,7 @@ class Curriculum extends Model
         // curriculumsテーブルからデータを取得
         $curriculums = DB::table('curriculums')
         ->join('delivery_times', 'curriculums.id', '=', 'curriculums_id')
-        ->join('grades', 'curriculums.classes_id', '=', 'name')
+        ->join('grades', 'curriculums.classes_id', '=', 'grades.id')
         ->get();
        
 
@@ -70,7 +70,7 @@ class Curriculum extends Model
     }
 
 
-   
+    // grades.id
 
 
     // // 詳細画面表示
@@ -106,6 +106,13 @@ class Curriculum extends Model
          return $curriculums;
          
      }
+
+    //  ↓ここで、classes_idをcurriculumsテーブル側の外部キーとして指定し、idをgradesテーブル側の主キーとして指定。
+
+     public function grade()
+    {
+    return $this->belongsTo(Grade::class, 'classes_id', 'id');
+    }
 
     
 }
