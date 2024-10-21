@@ -8,26 +8,39 @@
 @section('content')
 
 
-                                                  <!-- 20241015② -->
-                                                <div class="month-navigation">
-                                                    <!-- 前月リンク -->
-                                                    <a href="{{ route('schedule', ['month' => \Carbon\Carbon::parse($currentMonth)->subMonth()->format('Y-m')]) }}">◀︎</a>
-                                                    <!-- 現在の月表示 -->
-                                                    {{ \Carbon\Carbon::parse($currentMonth)->format('Y年n月') }}
-                                                    <!-- 翌月リンク -->
-                                                    <a href="{{ route('schedule', ['month' => \Carbon\Carbon::parse($currentMonth)->addMonth()->format('Y-m')]) }}">▶︎</a>
-                                                </div>
-                    
-                                                <div class="schedule">
-                                                    @foreach ($deliveryTimes as $deliveryTime)
-                                                        <div class="class-item">
-                                                            <h4>{{ $deliveryTime->title }}</h4>
-                                                            <p>{{ $deliveryTime->delivery_from->format('Y年n月j日') }} ~ {{ $deliveryTime->delivery_to->format('Y年n月j日') }}</p>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
+                                        <!-- 20241015② -->
+                                    <div class="month-navigation">
+                                        <!-- 前月リンク -->
+                                        <a href="{{ route('schedule', ['month' => \Carbon\Carbon::parse($currentMonth)->subMonth()->format('Y-m')]) }}">◀︎</a>
+                                        <!-- 現在の月表示 -->
+                                        {{ \Carbon\Carbon::parse($currentMonth)->format('Y年n月') }}
+                                        <!-- 翌月リンク -->
+                                        <a href="{{ route('schedule', ['month' => \Carbon\Carbon::parse($currentMonth)->addMonth()->format('Y-m')]) }}">▶︎</a>
+                                    </div>
+        
+                                    <div class="schedule">
+                                        @foreach ($delivery_times as $delivery_time)
+                                       
+                                    
+                                       
+                                            <div class="class-item">
+                                                
+                                                <p>{{ $delivery_time->delivery_from instanceof \Carbon\Carbon ? $delivery_time->
+                                                    delivery_from->format('Y年m月d日') : \Carbon\Carbon::parse($delivery_time->delivery_from)->
+                                                    format('Y年m月d日') }}</p>
+                                                <p>{{ $delivery_time->delivery_to instanceof \Carbon\Carbon ? $delivery_time->
+                                                    delivery_to->format('Y年m月d日') : \Carbon\Carbon::parse($delivery_time->delivery_to)->
+                                                    format('Y年m月d日') }}</p>
 
-                           
+
+
+                                            
+                                            
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                          
                            
                             
                 <!-- データ -->
@@ -45,30 +58,53 @@
                                 <th></th> -->
                             </tr>
                         </thead>
+
+
+
                         <tbody>
-                        @foreach ($curriculums as $curriculum)
-                            <tr>
-                                <!-- ↓curriculumsの方 -->
-                                <td>{{ $curriculum->title }}</td>
-                                <!-- <td>{{ $curriculum->classes_id }}</td> -->
-
-
-                                <td>{{ $curriculum->grade->name }}</td> <!-- gradeのnameを表示 -->
-                                <!-- ↓delivery_timesの方 -->
-
-                                <td>{{ $curriculum->delivery_from }}</td>
-                                <td>{{ $curriculum->delivery_to }}</td>
-                                
+                       
                        
 
-                                             
+
+                        @if(isset($grade) && is_object($grade))
+                         <h1>{{ $grade->name }}のカリキュラム</h1>
+                        @elseif(isset($grade) && is_iterable($grade))
+                            @foreach($grade as $g)
+                                <h1>{{ $g->name }}のカリキュラム</h1>
+                            @endforeach
+                        @endif
 
 
 
+
+                        @foreach ($curriculums as $curriculum)
+                            <div>
+                                <!-- ↓curriculumsの方 -->
+                                <h2>{{ $curriculum->title }}</h2>
+
+                                
+                                 <!-- <td>
+                                    {{ $curriculum->grade->name }}             
+                                 </td>
+
+                                <td>{{ $curriculum->classes_id }}</td> -->
+
+                                <td>
+                                <!-- <td>{{ $curriculum->grade->name }}</td> gradeのnameを表示 -->
+                                <!-- <a href="{{ route('grade', $curriculum->classes_id) }}" class="btn btn-primary btn-sm">{{ $curriculum->grade->name }}</a> -->
+                                
+                                </td>
+                                <!-- ↓delivery_timesの方 -->
+
+                                <p>配信期間： {{ $curriculum->delivery_from }} -
+                                {{ $curriculum->delivery_to }}
+                                </p>
+                            </div>
 
                             
+                            
                                                         
-                            </tr>
+                            
                         @endforeach
                         </tbody>
 

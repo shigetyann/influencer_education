@@ -32,8 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //学年詳細画面の表示ルーティング
-Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('grade');
-// Route::post('/detail/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum'])->name('detail');
+// Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum']);
+Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'showGrade'])->name('grade');
 
 // スケジュールのルーティング
 Route::get('/schedule', [App\Http\Controllers\CurriculumController::class, 'showSchedule'])->name('schedule');

@@ -85,27 +85,35 @@ class Curriculum extends Model
     //     return $curriculums;
     // }
 
-     // 商品一覧画面の検索機能
-     public function getDetail($classes_id) {
-         $curriculums = DB::table('curriculums')
-         ->join('delivery_times', 'curriculums.id', '=', 'curriculums_id')
-        //  ->select('curriculums.*', 'curriculums.classes_id');
-         ->select('grades', 'curriculums.classes_id', '=', 'name');
+     //学年の機能
+     public function getGrade($classes_id) {
+        //  $curriculums = DB::table('curriculums')
+        //  ->join('delivery_times', 'curriculums.id', '=', 'curriculums_id')
+        // //  ->select('curriculums.*', 'curriculums.classes_id');
+        //  ->select('grades', 'curriculums.classes_id', '=', 'name');
         
+        // //  if($classes_id){
+        // //  $curriculums->where('curriculums.classes_id', '=', $classes_id);
+        // //  }
+ 
         //  if($classes_id){
-        //  $curriculums->where('curriculums.classes_id', '=', $classes_id);
+        //  $curriculums->where('grades', 'curriculums.classes_id', '=', 'name');
         //  }
  
-         if($classes_id){
-         $curriculums->where('grades', 'curriculums.classes_id', '=', 'name');
-         }
  
+        //  $curriculums = $curriculums->get();
  
-         $curriculums = $curriculums->get();
- 
-         return $curriculums;
+        //  return $curriculums;
          
-     }
+            // 1021
+            $curriculums = DB::table('curriculums')
+                ->join('grades', 'curriculums.classes_id', '=', 'grades.id')
+                ->where('curriculums.classes_id', $classes_id)
+                ->select('curriculums.*', 'grades.name as grade_name')
+                ->get();
+
+            return $curriculums;
+    }
 
     //  ↓ここで、classes_idをcurriculumsテーブル側の外部キーとして指定し、idをgradesテーブル側の主キーとして指定。
 

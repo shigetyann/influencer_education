@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Delivery_time extends Model
 {
     use HasFactory;
-    protected $table = 'delivery_timess';
+    protected $table = 'delivery_times';
 
     protected $fillable =
     [
