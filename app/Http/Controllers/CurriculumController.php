@@ -115,6 +115,28 @@ public function showGrade($classes_id,$id){
    
 }
 
+// 学年IDと年月
+public function showCurriculum($gradeId, $yearMonth)
+{
+    // 年月を分割して年と月を取得
+    $year = substr($yearMonth, 0, 4);
+    $month = substr($yearMonth, 4, 2);
+
+    
+
+    // 学年情報を取得
+    $grade = Grade::find($gradeId);
+    
+
+    // 授業情報を該当の学年IDと年月で絞り込む
+    $curriculums = Curriculum::where('classes_id', $gradeId)
+                              ->whereYear('delivery_from', $year)
+                              ->whereMonth('delivery_from', $month)
+                              ->get();
+
+    return view('curriculum', compact('grade', 'curriculums', 'year', 'month'));
+}
+
 
 
                            

@@ -31,11 +31,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-//学年詳細画面の表示ルーティング
-// Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum']);
+// //学年詳細画面の表示ルーティング
+// // Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'curriculum']);
 Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class, 'showGrade'])->name('grade');
 
-// スケジュールのルーティング
+// // スケジュールのルーティング
 Route::get('/schedule', [App\Http\Controllers\CurriculumController::class, 'showSchedule'])->name('schedule');
 
-
+// 学年IDと年月のルーティング
+Route::get('/curriculums/{gradeId}/{yearMonth}', [App\Http\Controllers\CurriculumController::class, 'showCurriculum']);

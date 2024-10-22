@@ -40,6 +40,11 @@
                                         @endforeach
                                     </div>
 
+
+                                    <a href="{{ route('showCurriculum', ['gradeId' => $grade->id, 'yearMonth' => $previousMonth]) }}">◀︎</a>
+                                        {{ $year }}年{{ $month }}月
+                                    <a href="{{ route('showCurriculum', ['gradeId' => $grade->id, 'yearMonth' => $nextMonth]) }}">▶︎</a>
+
                           
                            
                             
@@ -65,15 +70,16 @@
                        
                        
 
-
+<!-- 
                         @if(isset($grade) && is_object($grade))
                          <h1>{{ $grade->name }}のカリキュラム</h1>
                         @elseif(isset($grade) && is_iterable($grade))
                             @foreach($grade as $g)
                                 <h1>{{ $g->name }}のカリキュラム</h1>
                             @endforeach
-                        @endif
+                        @endif -->
 
+                        <h1>{{ $grade->name }}の{{ $year }}年{{ $month }}月のカリキュラム</h1>
 
 
 
@@ -103,6 +109,12 @@
 
                             
                             
+                            
+
+
+
+
+
                                                         
                             
                         @endforeach
