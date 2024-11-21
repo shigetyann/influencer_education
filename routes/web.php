@@ -39,4 +39,4 @@ Route::get('/curriculum/{id}', [App\Http\Controllers\CurriculumController::class
 Route::get('/schedule', [App\Http\Controllers\CurriculumController::class, 'showSchedule'])->name('schedule');
 
 // 学年IDと年月のルーティング
-Route::get('/curriculums/{gradeId}/{yearMonth}', [App\Http\Controllers\CurriculumController::class, 'showCurriculum']);
+Route::get('/curriculums/{gradeId？}/{yearMonth？}', [App\Http\Controllers\CurriculumController::class, 'showCurriculum'])->name('showCurriculum');

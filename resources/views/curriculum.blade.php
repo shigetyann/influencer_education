@@ -45,6 +45,12 @@
                                         {{ $year }}年{{ $month }}月
                                     <a href="{{ route('showCurriculum', ['gradeId' => $grade->id, 'yearMonth' => $nextMonth]) }}">▶︎</a>
 
+
+                                    @if(session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                           
                            
                             

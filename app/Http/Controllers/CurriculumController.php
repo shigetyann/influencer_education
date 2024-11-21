@@ -116,8 +116,30 @@ public function showGrade($classes_id,$id){
 }
 
 // 学年IDと年月
-public function showCurriculum($gradeId, $yearMonth)
+public function showCurriculum($gradeId = null, $yearMonth = null)
 {
+    if (is_null($gradeId) || is_null($yearMonth)) {
+        return redirect()->route('fallbackRoute')->with('error','学年または年月の情報が不足しています。');
+    }
+
+    //通常の処理
+    $year = substr($yearMonth, 0, 4);
+    $month = substr($yearMonth, 4, 2);
+    $grade =Grade::find($gradeId);
+
+    if (!$grade){
+        return redirect()->route('fallbackRoute')->with('error', '指定された学年が見つかりません。');
+    }
+
+
+
+    //パラメータがnullの場合にデフォルト値を設定
+    $gradeId = $gradeId ?? 1; //1をデフォルトの学年IDに設定
+    $yearMonth = $yearMonth ?? now()->format('Ym');//現在の年月をデフォルトに設定
+
+    //デバック用
+    dd($gradeId, $yearMonth);
+
     // 年月を分割して年と月を取得
     $year = substr($yearMonth, 0, 4);
     $month = substr($yearMonth, 4, 2);
